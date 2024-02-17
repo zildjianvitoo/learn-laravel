@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-danger navbar-dark text-light">
+<nav class="navbar navbar-expand-lg bg-warning navbar-dark text-light">
     <div class=" container">
         <a class="navbar-brand" href="/">VITO</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -14,7 +14,7 @@
                     <a class="nav-link {{ $title === "About" ? "active" : "" }}" href="/about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ $title === " Blog" ? "active" : "" }}" href="/blog">Blog</a>
+                    <a class="nav-link {{ $title === "Blog" ? "active" : "" }}" href="/blog">Blog</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ $title === " Kocak" ? "active" : "" }}" href="/kocak">Kocak</a>
