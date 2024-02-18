@@ -27,5 +27,5 @@ Route::get('/about', [AboutController::class, "show"]);
 
 Route::get("/kocak", [KocakController::class, "show"]);
 
-Route::get('/blog', [BlogController::class, "index"]);
-Route::get("/blog/{slug}", [BlogController::class, "show"]);
+Route::get('/blogs  ', [BlogController::class, "index"]);
+Route::get("/blogs/{blog:slug}", [BlogController::class, "show"]);
