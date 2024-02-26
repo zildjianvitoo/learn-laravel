@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,9 +14,12 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("category_id");
+            $table->foreignId("user_id");
             $table->string("title");
             $table->string("slug");
             $table->string("author");
+            $table->string("excerpt");
             $table->string("body");
             $table->timestamps();
         });
@@ -29,3 +33,12 @@ return new class extends Migration
         Schema::dropIfExists('posts');
     }
 };
+// Post::create([
+//     "title" => "Judul 4",
+//     "user_id" => 1,
+//     "category_id" => 2,
+//     "slug" => "judul-4",
+//     "author" => "Kocak",
+//     "excerpt" => "loreman",
+//     "body" => "loremannnnn1111"
+// ])

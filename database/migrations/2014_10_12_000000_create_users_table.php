@@ -31,3 +31,10 @@ return new class extends Migration
         Schema::dropIfExists('users');
     }
 };
+
+// User::create([
+//     "name" => "Vito",
+//     "email" => "Vito@gmail.com",
+//     "password" => "kocak121212",
+    
+// ])
