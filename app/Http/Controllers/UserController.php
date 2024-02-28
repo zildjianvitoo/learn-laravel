@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
+
 use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\isNull;
@@ -19,6 +19,11 @@ class UserController extends Controller
     public function show(User $user): View
     {
         return view("users-update", ["title" => $user->name, "user" => User::find($user->id)]);
+    }
+
+    public function showPost(User $user): View
+    {
+        return view("user", ["title" => $user->name, "posts" => $user->posts]);
     }
 
     public function store(Request $request)

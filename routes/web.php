@@ -27,10 +27,6 @@ Route::get(
 
 Route::get('/about', [AboutController::class, "show"]);
 
-Route::get("/kocak", [KocakController::class, "show"]);
-
-// Route::get('/blogs  ', [BlogController::class, "index"]);
-// Route::get("/blogs/{blog:slug}", [BlogController::class, "show"]);
 
 Route::get("/posts", [PostController::class, "index"]);
 Route::get("/posts/{post:slug}", [PostController::class, "show"]);
@@ -44,3 +40,4 @@ Route::delete("/users/{user}", [UserController::class, "destroy"])->name("users.
 
 Route::get("/users/update/{user}", [UserController::class, "show"])->name("users.show");
 Route::patch("/users/update/{user}", [UserController::class, "update"])->name("users.update");
+Route::get("/users/{user:name}", [UserController::class, "showPost"]);
