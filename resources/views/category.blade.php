@@ -8,7 +8,7 @@
                     {{ $post->title }}
                 </a>
             </h1>
-            <h3>Author: <a href="/users/{{ $user->name }}">{{ $post->user->name }}</a></h3>
+            <h3>Author: <a href="/users/{{ $post->user->name }}">{{ $post->user->name }}</a></h3>
             <h5>{{ $post->body }}</h5>
         </div>
     @endforeach
