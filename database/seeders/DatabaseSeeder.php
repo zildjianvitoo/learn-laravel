@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -23,13 +24,23 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // User::factory()->count(5)->create();
+        User::factory()->count(5)->create();
+        Post::factory()->count(5)->create();
 
-        $this->call(
-            [
-                // UserSeeder::class,
-                PostSeeder::class,
-            ]
-        );
+        Category::create([
+            "name" => "Web Development",
+            "slug" => "web-development",
+        ]);
+        Category::create([
+            "name" => "Programming",
+            "slug" => "programming",
+        ]);
+
+        // $this->call(
+        //     [
+        //         // UserSeeder::class,
+        //         PostSeeder::class,
+        //     ]
+        // );
     }
 }

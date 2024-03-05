@@ -40,4 +40,4 @@ Route::delete("/users/{user}", [UserController::class, "destroy"])->name("users.
 
 Route::get("/users/update/{user}", [UserController::class, "show"])->name("users.show");
 Route::patch("/users/update/{user}", [UserController::class, "update"])->name("users.update");
-Route::get("/users/{user:name}", [UserController::class, "showPost"]);
+Route::get("/users/{user:username}", [UserController::class, "showPost"]);

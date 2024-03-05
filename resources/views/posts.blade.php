@@ -1,14 +1,24 @@
 @extends('layouts.main')
 
 @section('container')
+    <h1>{{ $title }}</h1>
     @foreach ($posts as $post)
-        <div style="margin-top: 4rem">
-            <h1>
+        <div style="margin-top: 2rem">
+            <h2>
                 <a href="/posts/{{ $post->slug }}" class="text-decoration-none">
                     {{ $post->title }}
                 </a>
-            </h1>
-            <h3>Author: <a href="/users/{{ $post->user->name }}" class="text-decoration-none">{{ $post->user->name }}</a></h3>
+            </h2>
+            <h3>By:
+                <a href="/users/{{ $post->user->username }}" class="text-decoration-none">
+                    {{ $post->user->name }}
+
+                </a>
+                in
+                <a href="/categories/{{ $post->category->slug }}" class="text-decoration-none">
+                    {{ $post->category->name }}
+                </a>
+            </h3>
             <h5>{{ $post->excerpt }}</h5>
         </div>
     @endforeach

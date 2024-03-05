@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("slug");
             $table->string("author");
             $table->string("excerpt");
-            $table->string("body");
+            $table->text("body");
             $table->timestamps();
         });
     }

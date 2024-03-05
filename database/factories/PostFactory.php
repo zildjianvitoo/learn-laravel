@@ -18,13 +18,14 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            "category_id" => 1,
-            "user_id" => 2,
+            "category_id" => mt_rand(1, 2),
+            "user_id" => mt_rand(1, 5),
+
             "title" => fake()->text(10),
-            "slug" => "judul-" . Str::random(5),
-            "author" => Str::random(10),
-            "excerpt" => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, officiis.",
-            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus illum, itaque mollitia animi a numquam voluptatibus nulla deleniti delectus odit? Officiis, atque aliquam temporibus natus asperiores ab cumque harum dolore!w",
+            "slug" => fake()->slug(2),
+            "author" => fake()->name(),
+            "excerpt" => fake()->sentence(mt_rand(6, 10)),
+            "body" => fake()->paragraph(mt_rand(5, 8)),
         ];
     }
 }

@@ -23,7 +23,13 @@ class UserController extends Controller
 
     public function showPost(User $user): View
     {
-        return view("user", ["title" => $user->name, "posts" => $user->posts]);
+        return view(
+            "posts",
+            [
+                "title" => "Posts by User: $user->name",
+                "posts" => $user->posts->load("user", "category")
+            ]
+        );
     }
 
     public function store(Request $request)
