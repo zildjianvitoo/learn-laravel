@@ -42,7 +42,7 @@ class CategoryController extends Controller
             "posts",
             [
                 "title" => "Posts by Category: $category->name",
-                "posts" => $category->posts->load("user", "category")
+                "posts" => $category->posts
             ]
         );
     }

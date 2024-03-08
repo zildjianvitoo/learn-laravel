@@ -27,7 +27,7 @@ class UserController extends Controller
             "posts",
             [
                 "title" => "Posts by User: $user->name",
-                "posts" => $user->posts->load("user", "category")
+                "posts" => $user->posts
             ]
         );
     }

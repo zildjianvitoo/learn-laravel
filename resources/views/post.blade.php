@@ -10,7 +10,6 @@
                 {{ $post->category->name }}
             </a>
         </h3>
-
         <h5>{{ $post->body }}</h5>
     </article>
 @endsection

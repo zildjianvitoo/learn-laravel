@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="en">
 
@@ -13,10 +11,10 @@
 
 <body>
 
-    @include("partials.navbar")
+    @include('partials.navbar')
 
-    <div class="container mt-4">
-        @yield("container")
+    <div class="container mt-4 mb-5">
+        @yield('container')
     </div>
 
 
