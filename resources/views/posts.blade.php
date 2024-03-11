@@ -5,6 +5,11 @@
     <div class="row my-3 justify-content-center">
         <div class="col-md-6">
             <form action="/posts" method="GET">
+                @if (request('category'))
+                    <input type="hidden" name="category" value="{{ request('category') }}" />
+                @elseif (request('user'))
+                    <input type="hidden" name="user" value="{{ request('user') }}" />
+                @endif
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Search" name="search"
                         value="{{ request('search') }}">
@@ -26,12 +31,12 @@
                     </a>
                 </h3>
                 <h5>By:
-                    <a href="/users/{{ $posts[0]->user->username }}" class="text-decoration-none">
+                    <a href="/posts?user={{ $posts[0]->user->username }}" class="text-decoration-none">
                         {{ $posts[0]->user->name }}
 
                     </a>
                     in
-                    <a href="/categories/{{ $posts[0]->category->slug }}" class="text-decoration-none">
+                    <a href="/posts?category={{ $posts[0]->category->slug }}" class="text-decoration-none">
                         {{ $posts[0]->category->name }}
                     </a>
 
@@ -49,11 +54,11 @@
                 </button>
             </div>
         </div>
-        <div class="row ">
+        <div class="row">
             @foreach ($posts->skip(1) as $post)
                 <div style="margin-top: 2rem" class="col-sm-6 col-lg-4 h-full  d-flex align-items-stretch">
                     <div class="card">
-                        <a href="/categories/{{ $post->category->slug }}"
+                        <a href="/posts?category={{ $post->category->slug }}"
                             class="position-absolute px-3 py-2 text-decoration-none text-white  cursor-pointer"
                             style="border-bottom-right-radius: 8px; background-color: rgba(0, 0, 0, 0.7)">
                             {{ $post->category->name }}
@@ -66,7 +71,7 @@
                                 </a>
                             </h3>
                             <h6 class="card-text">By:
-                                <a href="/users/{{ $post->user->username }}" class="text-decoration-none">
+                                <a href="/posts?user={{ $post->user->username }}" class="text-decoration-none">
                                     {{ $post->user->name }}
 
                                 </a>
@@ -88,6 +93,9 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+         <div class="mt-3">
+                {{ $posts->links() }}
         </div>
     @endif
 @endsection

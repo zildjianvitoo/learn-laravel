@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,11 +16,22 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
+        $title = "All Posts";
+
+        if ($request->query("category")) {
+            $category = Category::firstWhere("slug", $request->query("category"));
+            $title = "Category: " . $category->name;
+        }
+
+        if ($request->query("user")) {
+            $user = User::firstWhere("username", $request->query("user"));
+            $title = "Author: " . $user->name;
+        }
 
         return view("posts", [
-            "title" => "All Posts",
+            "title" => $title,
             "active" => "posts",
-            "posts" => Post::latest()->filter(request(["search"]))->get()
+            "posts" => Post::latest()->filter(request(["search", "category", "user"]))->paginate(7)->withQueryString()
         ]);
     }
 

@@ -21,16 +21,6 @@ class UserController extends Controller
         return view("users-update", ["title" => $user->name, "user" => User::find($user->id)]);
     }
 
-    public function showPost(User $user): View
-    {
-        return view(
-            "posts",
-            [
-                "title" => "Posts by User: $user->name",
-                "posts" => $user->posts
-            ]
-        );
-    }
 
     public function store(Request $request)
     {
