@@ -11,6 +11,6 @@ class HomeController extends Controller
     public function show(): View
     {
 
-        return view("home", ["title" => " Home"]);
+        return view("home", ["title" => "Home", "active" => "home"]);
     }
 }

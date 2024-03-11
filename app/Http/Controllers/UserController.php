@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function index(): View
     {
-        return view("users", ["title" => "Users", "users" => User::all()]);
+        return view("users", ["title" => "Users", "active" => "users", "users" => User::all()]);
     }
 
     public function show(User $user): View

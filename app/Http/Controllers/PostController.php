@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
         return view("posts", [
             "title" => "All Posts",
-            "posts" => Post::latest()->get()
+            "active" => "posts",
+            "posts" => Post::latest()->filter(request(["search"]))->get()
         ]);
     }
 
@@ -41,7 +44,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
 
-        return view("post", ["title" => $post->title, "post" => $post]);
+        return view("post", ["title" => $post->title, "active" => "single-post", "post" => $post]);
     }
 
     /**

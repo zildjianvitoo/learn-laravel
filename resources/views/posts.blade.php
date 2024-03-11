@@ -1,10 +1,20 @@
 @extends('layouts.main')
 
 @section('container')
-    <h1>{{ $title }}</h1>
-
+    <h1 class="text-center">{{ $title }}</h1>
+    <div class="row my-3 justify-content-center">
+        <div class="col-md-6">
+            <form action="/posts" method="GET">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search" name="search"
+                        value="{{ request('search') }}">
+                    <button class="btn btn-warning text-white" type="submit" id="button-addon2">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
     @if ($posts->count() == 0)
-        <h3>Tidak ada postingan</h3>
+        <h3 class="text-center">Tidak ada postingan</h3>
     @else
         <div class="card mb-3">
             <img src="https://source.unsplash.com/1200x400/?{{ $posts[0]->category->slug }}" class="card-img-top"
@@ -41,11 +51,15 @@
         </div>
         <div class="row ">
             @foreach ($posts->skip(1) as $post)
-                <div style="margin-top: 2rem" class="col-sm-6 col-lg-4  d-flex align-items-stretch">
+                <div style="margin-top: 2rem" class="col-sm-6 col-lg-4 h-full  d-flex align-items-stretch">
                     <div class="card">
-                        <img src="https://source.unsplash.com/1200x400/?{{ $post->category->slug }}" class="card-img-top"
-                            alt="image unsplash" />
-                        <article class="card-body">
+                        <a href="/categories/{{ $post->category->slug }}"
+                            class="position-absolute px-3 py-2 text-decoration-none text-white  cursor-pointer"
+                            style="border-bottom-right-radius: 8px; background-color: rgba(0, 0, 0, 0.7)">
+                            {{ $post->category->name }}
+                        </a>
+                        <img src="https://source.unsplash.com/600x300/?{{ $post->category->slug }}" alt="image unsplash" />
+                        <article class="card-body d-flex flex-column">
                             <h3 class="card-title">
                                 <a href="/posts/{{ $post->slug }}" class="text-decoration-none">
                                     {{ $post->title }}
@@ -63,11 +77,13 @@
                                 </small>
                             </h6>
                             <p class="card-text">{{ $post->excerpt }}</p>
-                            <button class="btn btn-primary mt-auto d-flex align-items-end justify-content-end">
-                                <a href="/posts/{{ $post->slug }}" class="text-white text-decoration-none">
-                                    Read more
-                                </a>
-                            </button>
+                            <div class="d-flex align-self-end mt-auto ">
+                                <button class="btn btn-primary ">
+                                    <a href="/posts/{{ $post->slug }}" class="text-white text-decoration-none">
+                                        Read more
+                                    </a>
+                                </button>
+                            </div>
                         </article>
                     </div>
                 </div>

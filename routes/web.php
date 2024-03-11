@@ -25,7 +25,7 @@ Route::get(
     [HomeController::class, "show"]
 );
 
-Route::get('/about', [AboutController::class, "show"]);
+
 
 
 Route::get("/posts", [PostController::class, "index"]);
@@ -36,8 +36,8 @@ Route::get("/categories/{category:slug}", [CategoryController::class, "show"]);
 
 Route::post("/users", [UserController::class, "store"])->name("users.store");
 Route::get("/users", [UserController::class, "index"])->name("users.index");
-Route::delete("/users/{user}", [UserController::class, "destroy"])->name("users.destroy");
+Route::get("/users/{user:username}", [UserController::class, "showPost"]);
 
+Route::delete("/users/{user}", [UserController::class, "destroy"])->name("users.destroy");
 Route::get("/users/update/{user}", [UserController::class, "show"])->name("users.show");
 Route::patch("/users/update/{user}", [UserController::class, "update"])->name("users.update");
-Route::get("/users/{user:username}", [UserController::class, "showPost"]);

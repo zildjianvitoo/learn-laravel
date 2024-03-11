@@ -25,7 +25,9 @@ class PostFactory extends Factory
             "slug" => fake()->slug(2),
             "author" => fake()->name(),
             "excerpt" => fake()->sentence(mt_rand(6, 10)),
-            "body" => fake()->paragraph(mt_rand(5, 8)),
+            "body" => collect(fake()->paragraphs(mt_rand(5, 8)))
+                ->map(fn ($paragraph) => "<p>$paragraph</p>")
+                ->implode(""),
         ];
     }
 }

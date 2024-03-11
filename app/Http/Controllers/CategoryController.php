@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view("categories", ["title" => "List Kategori", "categories" => Category::all()]);
+        return view("categories", ["title" => "All Categories", "active" => "categories", "categories" => Category::all()]);
     }
 
     /**
@@ -42,6 +42,7 @@ class CategoryController extends Controller
             "posts",
             [
                 "title" => "Posts by Category: $category->name",
+                "active" => "post-by-category",
                 "posts" => $category->posts
             ]
         );
