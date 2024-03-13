@@ -29,7 +29,7 @@ class Post extends Model
 
     public function scopeFilter(Builder $query, array $filters): void
     {
-        $dump = "";
+
         $query->when($filters["search"] ?? false, function ($query, $searchValue) {
             return $query->where("title", "like", "%" . $searchValue . "%")
                 ->orWhere("body", "like", "%" . $searchValue . "%");

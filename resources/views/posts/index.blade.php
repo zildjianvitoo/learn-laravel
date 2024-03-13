@@ -94,8 +94,8 @@
                 </div>
             @endforeach
         </div>
-         <div class="mt-3">
-                {{ $posts->links() }}
+        <div class="mt-3">
+            {{ $posts->links() }}
         </div>
     @endif
 @endsection
