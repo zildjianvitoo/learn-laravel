@@ -41,4 +41,6 @@ Route::get("/users/update/{user}", [UserController::class, "show"])->name("users
 Route::patch("/users/update/{user}", [UserController::class, "update"])->name("users.update");
 
 Route::get("/login", [LoginController::class, "index"]);
+
 Route::get("/register", [RegisterController::class, "index"]);
+Route::post("/register", [RegisterController::class, "store"]);
