@@ -21,12 +21,35 @@
         </li>
       </ul>
 
+      @auth
+        <div class="dropdown" class="list-unstyled" style="margin-left: auto">
+          <a class="dropdown-toggle text-decoration-none text-white" href="#" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Hallo, {{ auth()->user()->name }}
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/dashboard"> <i class="bi bi-grid"></i> Dashboard</a></li>
 
-      <a href="/login" style="margin-left: auto">
-        <button class="btn btn-warning"><i class="bi bi-box-arrow-in-right"></i>
-          Login
-        </button>
-      </a>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <form action="/logout" method="POST">
+                @csrf
+                <button type="submit" class="btn"> <i class="bi bi-box-arrow-left"></i> Logout</button>
+              </form>
+          </ul>
+        </div>
+      @endauth
+      @guest
+        <a href="/login" style="margin-left: auto">
+          <button class="btn btn-warning"><i class="bi bi-box-arrow-in-right"></i>
+            Login
+          </button>
+        </a>
+      @endguest
+
+
 
       </ul>
     </div>
