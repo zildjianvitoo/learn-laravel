@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+
+class DashboardPostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view("dashboard.index", ["title" => "Dashboard", "active" => "dashboard"]);
+        return view(
+            "dashboard.posts.index",
+            [
+                "title" => "Utama",
+                "posts" => Post::where("user_id", auth()->user()->id)->get()
+            ]
+        );
     }
 
     /**
@@ -33,15 +41,21 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
-        //
+        return view(
+            "dashboard.posts.post",
+            [
+                "title" => $post->title,
+                "post" => $post
+            ]
+        );
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Post $post)
     {
         //
     }
@@ -49,7 +63,7 @@ class DashboardController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Post $post)
     {
         //
     }
@@ -57,7 +71,7 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
         //
     }
