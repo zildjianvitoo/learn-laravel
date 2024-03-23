@@ -46,7 +46,7 @@
         </div>
         <div>
           <label for="description">Description</label>
-          <input id="description" type="hidden" name="description" />
+          <input id="description" value="{{ old('description') }}" type="hidden" name="description" />
           <trix-editor input="description"></trix-editor>
           @error('description')
             <p class="text-danger">

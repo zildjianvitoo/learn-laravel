@@ -68,6 +68,10 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
+
+        if ($post->user->id !== Auth::user()->id) {
+            abort(403);
+        }
         return view(
             "dashboard.posts.post",
             [
@@ -82,6 +86,9 @@ class DashboardPostController extends Controller
      */
     public function edit(Post $post)
     {
+        if ($post->author->id !== Auth::user()->id) {
+            abort(403);
+        }
         return view("dashboard.posts.edit", [
             "title" => "Edit $post->title",
             "post" => $post,
@@ -116,7 +123,7 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post = Post::firstWhere("slug", $post->slug);
+        $post = Post::find($post->id);
         $post->delete();
         return redirect("/dashboard/posts");
     }
