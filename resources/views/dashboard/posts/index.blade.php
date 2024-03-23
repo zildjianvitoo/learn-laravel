@@ -3,6 +3,10 @@
 
 @section('main')
   <div class="mt-3">
+    <a href="/dashboard/posts/create">
+      <button class="btn btn-primary">Create New Post
+      </button>
+    </a>
     <table class="table table-striped">
       <thead>
         <tr>
