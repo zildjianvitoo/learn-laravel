@@ -10,7 +10,7 @@
         </h1>
         <div class="d-flex gap-3">
           <a href="/dashboard/posts" class="btn btn-success my-3">Back to All My Posts</a>
-          <a href="/dashboard/posts/edit" class="btn btn-primary my-3">Edit</a>
+          <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-primary my-3">Edit</a>
           <form action="/dashboard/posts/{{ $post->slug }}" method="POST">
             @csrf
             @method('DELETE')

@@ -45,23 +45,22 @@ class DashboardPostController extends Controller
 
         $validated = $request->validate([
             "title" => "required|min:5|max:255",
+            "slug" => "required|min:5|max:255|unique:posts",
             "category" => "required",
             "description" => "required|min:20",
-            "slug" => "required|min:3",
         ]);
-
 
         Post::create([
             "title" => $validated["title"],
             "slug" => $validated["slug"],
             "author" => Auth::user()->name,
-            "excerpt" => Str::excerpt($validated["description"]),
+            "excerpt" => Str::excerpt(strip_tags($validated["description"])),
             "body" => $validated["description"],
             "category_id" => (int)$validated["category"],
             "user_id" => Auth::user()->id,
         ]);
 
-        return redirect("/dashboard/posts");
+        return redirect("/dashboard/posts")->with("success", "New post has been added");
     }
 
     /**
@@ -83,7 +82,11 @@ class DashboardPostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view("dashboard.posts.edit", [
+            "title" => "Edit $post->title",
+            "post" => $post,
+            "categories" => Category::all()
+        ]);
     }
 
     /**
@@ -91,7 +94,21 @@ class DashboardPostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $validated = $request->validate([
+            "title" => "required|min:5|max:255",
+            "category" => "required",
+            "description" => "required|min:20",
+        ]);
+
+        $post = Post::find($post->id);
+        $post->update([
+            "title" => $validated["title"],
+            "excerpt" => Str::excerpt(strip_tags($validated["description"])),
+            "body" => $validated["description"],
+            "category_id" => (int)$validated["category"],
+        ]);
+
+        return redirect("/dashboard/posts")->with("success", "Berhasil update");
     }
 
     /**
