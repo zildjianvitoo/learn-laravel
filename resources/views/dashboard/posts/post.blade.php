@@ -17,8 +17,17 @@
             <button class="btn btn-danger my-3" type="submit">Delete</button>
           </form>
         </div>
-        <img src="https://source.unsplash.com/1200x450/?{{ $post->category->slug }}" alt="unsplash image"
-          class="img-fluid ">
+        {{-- @dd("/storage/$post->image") --}}
+        @if ($post->image)
+          <div class="relative">
+            <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}"
+              style="object-fit: cover; overflow: hidden;" height="450" />
+          </div>
+        @else
+          <img src="https://source.unsplash.com/1200x450/?{{ $post->category->slug }}" alt="unsplash image"
+            class="img-fluid ">
+        @endif
+
         <p class="fs-5 fw-normal">{!! $post->body !!}</p>
       </div>
     </div>

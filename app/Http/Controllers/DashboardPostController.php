@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
-
+use Illuminate\Validation\Rules\File;
 
 class DashboardPostController extends Controller
 {
@@ -42,17 +42,21 @@ class DashboardPostController extends Controller
      */
     public function store(Request $request)
     {
-
         $validated = $request->validate([
             "title" => "required|min:5|max:255",
             "slug" => "required|min:5|max:255|unique:posts",
+            "image" => "image|file|max:2048",
             "category" => "required",
             "description" => "required|min:20",
         ]);
 
+        $image = $request->file("image");
+        $path =   $image->storePubliclyAs("post-images", $request["slug"] . "." . $image->extension());
+
         Post::create([
             "title" => $validated["title"],
             "slug" => $validated["slug"],
+            "image" => $path,
             "author" => Auth::user()->name,
             "excerpt" => Str::excerpt(strip_tags($validated["description"])),
             "body" => $validated["description"],
@@ -86,7 +90,7 @@ class DashboardPostController extends Controller
      */
     public function edit(Post $post)
     {
-        if ($post->author->id !== Auth::user()->id) {
+        if ($post->user->id !== Auth::user()->id) {
             abort(403);
         }
         return view("dashboard.posts.edit", [

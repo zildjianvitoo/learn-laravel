@@ -4,7 +4,7 @@
   <section class=" mt-2 ">
     <h1>Create new Post</h1>
     <div class="row">
-      <form action="/dashboard/posts" method="POST" class=" d-flex col-md-8 flex-column gap-3">
+      <form action="/dashboard/posts" method="POST" class=" d-flex col-md-8 flex-column gap-3" enctype="multipart/form-data">
         @csrf
         <div>
           <label for="title">Title</label>
@@ -43,6 +43,15 @@
             </p>
           @enderror
 
+        </div>
+        <div class=" mb-3">
+          <label for="image">Image</label>
+          <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+          @error('image')
+            <p class="invalid-feedback text-danger my-0">
+              {{ $message }}
+            </p>
+          @enderror
         </div>
         <div>
           <label for="description">Description</label>
